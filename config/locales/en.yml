@@ -1,6 +1,17 @@
 ---
 en:
+
   decidim:
+    guest_meeting_registration:
+      admin:
+        guest_meeting_settings:
+          edit:
+            update: Update
+            title: Meeting Guest Registration
+        guest_meeting_session:
+          enable_guest_registration_help_html: Allow guest users to register to meetings
+      menu:
+        guest_meeting_registration_settings: Guest meeting settings
     components:
       guest_meeting_registration:
         name: GuestMeetingRegistration

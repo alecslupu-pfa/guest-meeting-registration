@@ -3,7 +3,6 @@
 require "decidim/guest_meeting_registration/admin"
 require "decidim/guest_meeting_registration/engine"
 require "decidim/guest_meeting_registration/admin_engine"
-require "decidim/guest_meeting_registration/component"
 
 module Decidim
   # This namespace holds the logic of the `GuestMeetingRegistration` component. This component
