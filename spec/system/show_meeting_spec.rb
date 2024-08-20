@@ -492,8 +492,4 @@ describe "Show meeting", type: :system do
       end
     end
   end
-
-  context "when guest registration is enabled" do
-    let(:state) { true }
-  end
 end
