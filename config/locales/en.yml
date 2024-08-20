@@ -8,7 +8,8 @@ en:
       admin:
         guest_meeting_session:
           enable_guest_registration_help_html: Allow guest users to register to meetings
-          enable_registration_confirmation_help_html: Force users to confirm their meeting registration
+          enable_registration_confirmation_help_html: Force users to confirm their
+            meeting registration
         guest_meeting_settings:
           edit:
             title: Meeting Guest Registration
