@@ -19,31 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         folder:
-          - "spec/accountability"
-          - "spec/budgets"
-          - "spec/commands"
-          - "spec/elections"
-          - "spec/events"
-          - "spec/forms"
-          - "spec/models"
-          - "spec/proposals/cells"
-          - "spec/proposals/commands"
-          - "spec/proposals/controllers"
-          - "spec/proposals/events"
-          - "spec/proposals/forms"
-          - "spec/proposals/helpers"
-          - "spec/proposals/lib"
-          - "spec/proposals/models"
-          - "spec/proposals/permissions"
-          - "spec/proposals/presenters"
-          - "spec/proposals/queries"
-          - "spec/proposals/services"
-          - "spec/proposals/system/admin"
-          - "spec/proposals/system/amendable"
-          - "spec/proposals/system/*.rb"
-          - "spec/proposals/types"
-          - "spec/sortitions"
-          - "spec/system"
+          - "spec"
     uses: ./.github/workflows/test_app.yml
     secrets: inherit
     name: Testing ${{ matrix.folder }}
