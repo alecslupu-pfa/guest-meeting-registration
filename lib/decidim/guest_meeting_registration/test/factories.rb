@@ -3,11 +3,12 @@
 require "decidim/core/test/factories"
 
 FactoryBot.define do
-  factory :guest_meeting_registration_component, parent: :component do
-    name { Decidim::Components::Namer.new(participatory_space.organization.available_locales, :guest_meeting_registration).i18n_name }
-    manifest_name :guest_meeting_registration
-    participatory_space { create(:participatory_process, :with_steps) }
-  end
+  factory :guest_meeting_registration_settings, class: "Decidim::GuestMeetingRegistration::Setting" do
+    organization
+    enable_guest_registration { false }
 
-  # Add engine factories here
+    trait :enabled do
+      enable_guest_registration { true }
+    end
+  end
 end
