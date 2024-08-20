@@ -10,5 +10,14 @@ ignore_missing:
   - decidim.meetings.meetings.show.join
   - decidim.meetings.meetings.show.no_slots_available
   - decidim.meetings.meetings.show.remaining_slots
-  - decidim.admin.organization.update.success
-  - decidim.admin.organization.update.error
+  - decidim.admin.organization.update.*
+  - decidim.meetings.registrations.create.*
+  - decidim.forms.questionnaires.show.questionnaire_not_published.*
+  - decidim.forms.questionnaires.show.questionnaire_answered.*
+  - decidim.forms.questionnaires.show.questionnaire_js_disabled.*
+  - decidim.forms.questionnaires.show.questionnaire_for_private_users.*
+  - decidim.forms.questionnaires.show.answer_questionnaire.*
+  - decidim.forms.questionnaires.show.questionnaire_closed.*
+  - decidim.forms.questionnaires.show.tos_agreement
+  - decidim.forms.questionnaires.show.current_step
+  - decidim.forms.questionnaires.show.of_total_steps

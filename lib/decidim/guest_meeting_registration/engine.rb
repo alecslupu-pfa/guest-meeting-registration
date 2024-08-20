@@ -11,9 +11,24 @@ module Decidim
       isolate_namespace Decidim::GuestMeetingRegistration
 
       routes do
-        # Add engine routes here
-        # resources :guest_meeting_registration
-        # root to: "guest_meeting_registration#index"
+        resource :guest_meeting_registration, path: "/", only: [:create, :destroy] do
+          collection do
+            get :create
+            get :decline_invitation
+            get :join, action: :show
+            post :answer
+          end
+        end
+
+        root to: "guest_meeting_registration#show"
+      end
+
+      initializer "decidim_admin_guest_meeting_registration.mount_routes", before: "decidim_admin.mount_routes" do
+        Decidim::Meetings::Engine.routes.append do
+          scope "/meetings/:meeting_id/guest-registration" do
+            mount Decidim::GuestMeetingRegistration::Engine => "/"
+          end
+        end
       end
 
       initializer "decidim_guest_meeting_registration.views" do

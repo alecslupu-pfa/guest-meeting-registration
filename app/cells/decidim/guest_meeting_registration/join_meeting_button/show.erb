@@ -1,12 +1,5 @@
-<%#= render :registration_confirm %>
-<%= action_authorized_button_to(
-      :join,
-      i18n_join_text,
-      "#",
-      class: button_classes,
-      disabled: !has_available_slots?,
-      data: { open: current_user.present? ? "meeting-registration-confirm-#{model.id}" : "loginModal" }
-    ) %>
+<%= render :join_guest_confirm %>
+<%= button_tag(i18n_join_text, class: button_classes, disabled: !has_available_slots?, data: { open: "guest-meeting-registration-join-#{model.id}" } ) %>
 
 <% if shows_remaining_slots? %>
   <span><%= t("remaining_slots", scope: "decidim.meetings.meetings.show", count: remaining_slots) %></span>

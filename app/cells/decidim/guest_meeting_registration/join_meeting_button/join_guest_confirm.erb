@@ -1,0 +1,23 @@
+<div class="reveal" data-reveal id="guest-meeting-registration-join-<%= model.id %>">
+  <div class="columns row">
+
+    <div class="columns medium-5">
+      <%= action_authorized_button_to(
+            :join,
+            "PLAIN text I have an account",
+            "#",
+            class: button_classes,
+            disabled: !model.has_available_slots?,
+            data: { open: "loginModal" }
+          ) %>
+    </div>
+    <div class="columns medium-5">
+      <%= link_to("PLAIN Login as guest", guest_registration_path, class: button_classes, disabled: !has_available_slots? ) %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="text-center">
+      <button class="link" data-close>PLAIN text Cancel</button>
+    </div>
+  </div>
+</div>

@@ -19,6 +19,10 @@ module Decidim
 
       private
 
+      def guest_registration_path
+        Decidim::EngineRouter.main_proxy(current_component).decidim_guest_meeting_registration_path(meeting_id: model.id)
+      end
+
       def button_classes
         return "button expanded button--sc" if big_button?
 

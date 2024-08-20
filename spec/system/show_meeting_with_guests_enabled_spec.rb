@@ -9,7 +9,7 @@ describe "Show meeting", type: :system do
   let!(:question) { create(:questionnaire_question, questionnaire: questionnaire, position: 0) }
   let!(:meeting) { create :meeting, :published, component: component, questionnaire: questionnaire }
   let!(:user) { create :user, :confirmed, organization: organization }
-  let(:state) { false }
+  let(:state) { true }
 
   let!(:guest_meeting_registration_settings) { create(:guest_meeting_registration_settings, enable_guest_registration: state, organization: organization) }
   let(:registrations_enabled) { true }
