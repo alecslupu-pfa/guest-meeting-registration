@@ -19,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         folder:
-          - "spec"
+          - "spec/system"
     uses: ./.github/workflows/test_app.yml
     secrets: inherit
     name: Testing ${{ matrix.folder }}
