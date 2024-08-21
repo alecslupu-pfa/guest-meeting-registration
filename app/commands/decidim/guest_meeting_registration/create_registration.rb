@@ -12,6 +12,7 @@ module Decidim
         return broadcast(:invalid) unless meeting.registrations_enabled? && meeting.has_available_slots?
 
         create_user
+        add_user_to_request!
 
         Decidim::GuestMeetingRegistration::JoinMeeting.call(meeting, user, registration_form)
 
@@ -27,6 +28,11 @@ module Decidim
 
       def registration_form
         @registration_form ||= Decidim::GuestMeetingRegistration::QuestionnaireForm.from_params(registration_request.form_data).with_context(form_context)
+      end
+
+      def add_user_to_request!
+        @registration_request.user = @user
+        @registration_request.save!
       end
 
       def form_context
@@ -56,7 +62,7 @@ module Decidim
 
       def create_user
         @user = current_organization.users.where(email: registration_form.email).first_or_initialize
-        raise ActiveRecord::RecordInvalid if user.persisted?
+        return if user.persisted?
 
         user.email = registration_form.email
         user.name = registration_form.name
