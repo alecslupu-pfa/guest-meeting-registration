@@ -1,6 +1,5 @@
 ---
 en:
-
   decidim:
     components:
       guest_meeting_registration:
@@ -21,10 +20,11 @@ en:
         success: You have successfully cancelled your meeting registration
       guest_meeting_registration_mailer:
         send_cancellation_request:
-          subject: Cancellation link for %{meeting_title}
-          greeting: Welcome %{recipient}!
           action: Cancel my registration
-          instruction: 'You can cancel meeting attendance at anytime accessing the link below:'
+          greeting: Welcome %{recipient}!
+          instruction: 'You can cancel meeting attendance at anytime accessing the
+            link below:'
+          subject: Cancellation link for %{meeting_title}
         send_confirmation:
           action: Confirm my registration
           greeting: Welcome %{recipient}!
