@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Decidim
   module GuestMeetingRegistration
     module RegistrationSerializer
@@ -14,9 +15,7 @@ module Decidim
 
         original_hash.each do |key, value|
           new_hash[key] = value
-          if key == key_to_find
-            new_hash[key_to_insert] = value_to_insert
-          end
+          new_hash[key_to_insert] = value_to_insert if key == key_to_find
         end
 
         new_hash
@@ -29,4 +28,3 @@ module Decidim
     end
   end
 end
-
