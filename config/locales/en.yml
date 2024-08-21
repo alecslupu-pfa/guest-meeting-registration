@@ -14,5 +14,11 @@ en:
           edit:
             title: Meeting Guest Registration
             update: Update
+      guest_meeting_registration_mailer:
+        send_confirmation:
+          action: Confirm my registration
+          greeting: Welcome %{recipient}!
+          instruction: 'You can confirm your email account through the link below:'
+          subject: Confirm your email to attend %{meeting_title}
       menu:
         guest_meeting_registration_settings: Guest meeting settings

@@ -1,0 +1,7 @@
+<p class="email-greeting"><%= t(".greeting", recipient: @registration_request.email) %></p>
+
+<p class="email-instructions"><%= t(".instruction") %></p>
+
+<p class="email-button email-button__cta">
+  <%= link_to t(".action"), confirmation_url(confirmation_token: @registration_request.confirmation_token) %>
+</p>

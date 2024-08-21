@@ -1,0 +1,5 @@
+<%= t(".greeting", recipient: @registration_request.email) %>
+
+<%= t(".instruction") %>
+
+<%= confirmation_url(confirmation_token: @registration_request.confirmation_token) %>

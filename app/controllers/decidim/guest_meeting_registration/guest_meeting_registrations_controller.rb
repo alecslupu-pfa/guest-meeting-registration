@@ -13,7 +13,7 @@ module Decidim
       def answer
         @form = form(Decidim::GuestMeetingRegistration::QuestionnaireForm).from_params(params, session_token: session_token)
 
-        Decidim::GuestMeetingRegistration::JoinMeeting.call(meeting, @form) do
+        Decidim::GuestMeetingRegistration::CreateMeetingRequest.call(meeting, @form) do
           on(:ok) do
             flash[:notice] = I18n.t("registrations.create.success", scope: "decidim.meetings")
             redirect_to after_answer_path
