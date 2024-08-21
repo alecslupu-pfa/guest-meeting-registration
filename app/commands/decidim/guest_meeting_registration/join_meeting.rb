@@ -4,6 +4,7 @@ module Decidim
   module GuestMeetingRegistration
     class JoinMeeting < Decidim::Meetings::JoinMeeting
       private
+
       def increment_score; end
     end
   end
