@@ -11,6 +11,7 @@ module Decidim
       isolate_namespace Decidim::GuestMeetingRegistration
 
       routes do
+        resources :cancellation, only: :show
         resources :confirm, only: :show
         resource :guest_meeting_registration, path: "/", only: [:create, :destroy] do
           collection do

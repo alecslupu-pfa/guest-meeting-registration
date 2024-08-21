@@ -15,6 +15,9 @@ en:
           edit:
             title: Meeting Guest Registration
             update: Update
+      cancellation:
+        error: There was a problem canceling your meeting registration
+        success: You have successfully cancelled your meeting registration
       guest_meeting_registration_mailer:
         send_confirmation:
           action: Confirm my registration
