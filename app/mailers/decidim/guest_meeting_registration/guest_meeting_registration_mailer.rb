@@ -8,7 +8,7 @@ module Decidim
 
       helper Decidim::ApplicationHelper
 
-      helper_method :confirmation_url
+      helper_method :confirmation_url, :cancellation_url
 
       def send_confirmation(registration_request, current_locale)
         @organization = registration_request.organization
@@ -21,7 +21,22 @@ module Decidim
         end
       end
 
+      def send_cancellation_request(registration_request)
+        @organization = registration_request.organization
+        @registration_request = registration_request
+
+        I18n.with_locale(registration_request.organization.default_locale) do
+          mail(to: registration_request.email,
+               subject: I18n.t("decidim.guest_meeting_registration.guest_meeting_registration_mailer.send_cancellation_request.subject",
+                               meeting_title: translated_attribute(registration_request.meeting.title)))
+        end
+      end
+
       private
+
+      def cancellation_url(cancellation_token: nil)
+        "#{meeting_base}/guest-registration/cancellation/#{cancellation_token}"
+      end
 
       def confirmation_url(confirmation_token: nil)
         "#{meeting_base}/guest-registration/confirm/#{confirmation_token}"

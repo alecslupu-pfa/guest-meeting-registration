@@ -16,6 +16,7 @@ module Decidim
 
         Decidim::GuestMeetingRegistration::JoinMeeting.call(meeting, user, registration_form)
 
+        send_cancellation_link! if enable_cancellation?
         broadcast(:ok)
       end
 
@@ -25,6 +26,15 @@ module Decidim
 
       delegate :meeting, to: :registration_request
       delegate :questionnaire, to: :meeting
+      delegate :enable_cancellation?, to: :meeting_registration_settings
+
+      def send_cancellation_link!
+        Decidim::GuestMeetingRegistration::SendCancellationJob.perform_later(registration_request.id)
+      end
+
+      def meeting_registration_settings
+        @meeting_registration_settings ||= Decidim::GuestMeetingRegistration::Setting.where(organization: current_organization).first_or_create
+      end
 
       def registration_form
         @registration_form ||= Decidim::GuestMeetingRegistration::QuestionnaireForm.from_params(registration_request.form_data).with_context(form_context)
@@ -32,6 +42,8 @@ module Decidim
 
       def add_user_to_request!
         @registration_request.user = @user
+        @registration_request.confirmed_at = Time.zone.now
+        @registration_request.confirmation_token = nil
         @registration_request.save!
       end
 

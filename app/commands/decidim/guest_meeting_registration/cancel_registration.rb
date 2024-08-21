@@ -11,6 +11,10 @@ module Decidim
         Decidim::GuestMeetingRegistration::LeaveMeeting.call(meeting, user)
         destroy_follow
         @registration_request.destroy
+
+        broadcast(:ok)
+      rescue StandardError
+        broadcast(:invalid)
       end
 
       private
