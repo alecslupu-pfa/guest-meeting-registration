@@ -10,6 +10,8 @@ module Decidim
   module GuestMeetingRegistration
     include ActiveSupport::Configurable
 
+    autoload :RegistrationSerializer, "decidim/guest_meeting_registration/registration_serializer"
+
     config_accessor :deface_enabled do
       ENV.fetch("DEFACE_ENABLED", nil) == "true" || Rails.env.test?
     end

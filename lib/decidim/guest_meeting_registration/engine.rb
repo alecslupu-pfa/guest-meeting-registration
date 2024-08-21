@@ -23,6 +23,12 @@ module Decidim
         root to: "guest_meeting_registration#show"
       end
 
+      initializer "decidim_guest_meeting_registration.extend" do
+        config.to_prepare do
+          Decidim::Meetings::RegistrationSerializer.prepend Decidim::GuestMeetingRegistration::RegistrationSerializer
+        end
+      end
+
       initializer "decidim_admin_guest_meeting_registration.mount_routes", before: "decidim_admin.mount_routes" do
         Decidim::Meetings::Engine.routes.append do
           scope "/meetings/:meeting_id/guest-registration" do
