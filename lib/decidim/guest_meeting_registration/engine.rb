@@ -28,6 +28,7 @@ module Decidim
       initializer "decidim_guest_meeting_registration.extend" do
         config.to_prepare do
           Decidim::Meetings::RegistrationSerializer.prepend Decidim::GuestMeetingRegistration::RegistrationSerializer
+          Decidim::CreateRegistration.prepend Decidim::GuestMeetingRegistration::AccountRegistration
         end
       end
 

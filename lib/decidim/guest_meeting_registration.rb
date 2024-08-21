@@ -11,6 +11,7 @@ module Decidim
     include ActiveSupport::Configurable
 
     autoload :RegistrationSerializer, "decidim/guest_meeting_registration/registration_serializer"
+    autoload :AccountRegistration, "decidim/guest_meeting_registration/account_registration"
 
     config_accessor :deface_enabled do
       ENV.fetch("DEFACE_ENABLED", nil) == "true" || Rails.env.test?

@@ -85,6 +85,8 @@ module Decidim
         user.notification_settings = { "close_meeting_reminder" => "0" }
         user.notifications_sending_frequency = "real_time"
         user.notification_types = "followed-only"
+        user.extended_data.merge!({ attend_meetings: true })
+
         user.save!
       end
     end
