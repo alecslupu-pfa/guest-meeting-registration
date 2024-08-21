@@ -30,5 +30,9 @@ en:
           greeting: Welcome %{recipient}!
           instruction: 'You can confirm your email account through the link below:'
           subject: Confirm your email to attend %{meeting_title}
+      join_meeting_button:
+        cancel: Cancel
+        i_have_account: I have an account
+        login_as_guest: Login as guest
       menu:
         guest_meeting_registration_settings: Guest meeting settings
