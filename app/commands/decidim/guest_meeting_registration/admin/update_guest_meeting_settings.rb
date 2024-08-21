@@ -31,7 +31,8 @@ module Decidim
         def attributes
           {
             enable_guest_registration: form.enable_guest_registration,
-            enable_registration_confirmation: form.enable_registration_confirmation
+            enable_registration_confirmation: form.enable_registration_confirmation,
+            enable_cancellation: form.enable_cancellation
           }
         end
       end

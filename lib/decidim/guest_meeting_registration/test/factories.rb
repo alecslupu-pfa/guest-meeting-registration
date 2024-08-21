@@ -7,6 +7,7 @@ FactoryBot.define do
     organization
     enable_guest_registration { false }
     enable_registration_confirmation { false }
+    enable_cancellation { false }
 
     trait :enabled do
       enable_guest_registration { true }
@@ -14,6 +15,9 @@ FactoryBot.define do
 
     trait :require_confirmation do
       enable_registration_confirmation { true }
+    end
+    trait :cancellable do
+      enable_cancellation { true }
     end
   end
 end

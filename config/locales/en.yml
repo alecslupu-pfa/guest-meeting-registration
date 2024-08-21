@@ -7,6 +7,7 @@ en:
     guest_meeting_registration:
       admin:
         guest_meeting_session:
+          enable_cancellation_help_html: Allow users to cancel their registration
           enable_guest_registration_help_html: Allow guest users to register to meetings
           enable_registration_confirmation_help_html: Force users to confirm their
             meeting registration

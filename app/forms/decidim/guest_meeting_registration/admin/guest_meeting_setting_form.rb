@@ -6,6 +6,7 @@ module Decidim
       class GuestMeetingSettingForm < Decidim::Form
         attribute :enable_guest_registration, Boolean, default: false
         attribute :enable_registration_confirmation, Boolean, default: false
+        attribute :enable_cancellation, Boolean, default: false
       end
     end
   end
