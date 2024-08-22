@@ -4,14 +4,14 @@ module Decidim
   module GuestMeetingRegistration
     class JoinMeetingButtonCell < Decidim::ViewModel
       delegate :enable_guest_registration?, to: :meeting_registration_settings, prefix: false
-      delegate :on_different_platform?, :has_available_slots?, :registration_form_enabled?, :remaining_slots, to: :model, prefix: false
+      delegate :on_different_platform?, :has_available_slots?, :registration_form_enabled?, :registrations_enabled?, :remaining_slots, to: :model, prefix: false
       delegate :current_user, to: :controller, prefix: false
       delegate_missing_to :controller
 
       def show
         return original_button if current_user.present?
         return original_button if on_different_platform?
-        # return original_button unless registration_form_enabled?
+        return original_button unless registrations_enabled?
         return original_button unless enable_guest_registration?
 
         render

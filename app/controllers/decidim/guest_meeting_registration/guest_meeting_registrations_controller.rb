@@ -13,7 +13,7 @@ module Decidim
       end
 
       def answer
-        @form = registration_form.from_params(params, session_token: session_token)
+        @form = registration_form.from_params(params, session_token: session_token, meeting: meeting)
 
         Decidim::GuestMeetingRegistration::CreateMeetingRequest.call(meeting, @form) do
           on(:ok) do

@@ -47,7 +47,7 @@ describe "Show meeting", type: :system do
       visit_meeting
 
       within ".card.extra" do
-        expect(page).not_to have_button("JOIN MEETING")
+        expect(page).not_to have_button("JOIN THE MEETING")
         expect(page).not_to have_text("20 slots remaining")
       end
     end
@@ -111,8 +111,10 @@ describe "Show meeting", type: :system do
           visit_meeting
 
           within ".card.extra" do
-            click_button "Join meeting"
+            click_button "Join the meeting"
           end
+
+          click_button "Join with account"
 
           expect(page).to have_css("#loginModal", visible: :visible)
         end
@@ -122,8 +124,10 @@ describe "Show meeting", type: :system do
             visit_meeting
 
             within ".card.extra" do
-              click_button "Join meeting"
+              click_button "Join the meeting"
             end
+
+            click_button "Join with account"
 
             within "#loginModal" do
               expect(page).to have_content("Sign in with Facebook")
