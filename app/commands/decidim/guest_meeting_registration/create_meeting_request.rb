@@ -48,6 +48,7 @@ module Decidim
         registration_request.name = registration_form.name
         registration_request.form_data = registration_form.submitted_params
         registration_request.cancellation_token = SecureRandom.hex
+        registration_request.session_token = registration_form.context&.session_token
 
         registration_request.save!
         registration_request

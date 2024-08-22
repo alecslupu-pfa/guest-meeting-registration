@@ -11,7 +11,7 @@ module Decidim
       def show
         return original_button if current_user.present?
         return original_button if on_different_platform?
-        return original_button unless registration_form_enabled?
+        # return original_button unless registration_form_enabled?
         return original_button unless enable_guest_registration?
 
         render

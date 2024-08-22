@@ -24,7 +24,7 @@ module Decidim
 
       attr_reader :user, :registration_request
 
-      delegate :meeting, to: :registration_request
+      delegate :meeting, :session_token, to: :registration_request
       delegate :questionnaire, :organization, :component, :participatory_space, to: :meeting
       delegate :enable_cancellation?, to: :meeting_registration_settings
 
@@ -55,26 +55,6 @@ module Decidim
           current_participatory_space: participatory_space,
           session_token: session_token
         }
-      end
-
-      # token is used as a substitute of user_id if unregistered
-      def session_token
-        id = registration_request.user&.id
-
-        session_id = if respond_to?(:request) && request&.session
-                       request.session[:session_id]
-                     else
-                       SecureRandom.hex
-                     end
-
-        return nil unless id || session_id
-
-        @session_token ||= tokenize(id || session_id)
-      end
-
-      def tokenize(id, length: 10)
-        tokenizer = Decidim::Tokenizer.new(salt: questionnaire.salt || questionnaire.id, length: length)
-        tokenizer.int_digest(id).to_s
       end
 
       def create_user

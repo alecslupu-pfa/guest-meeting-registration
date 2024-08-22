@@ -1,0 +1,36 @@
+# frozen_string_literal: true
+
+module Decidim
+  module GuestMeetingRegistration
+    class SimpleForm < Decidim::Form
+      include ActiveModel::Validations::Callbacks
+
+      attribute :email
+      attribute :name
+      attribute :public_participation, Boolean, default: false
+
+      attribute :tos_agreement, Boolean
+
+      before_validation :before_validation
+
+      validates :tos_agreement, allow_nil: false, acceptance: true
+      validates :name, presence: true
+      validates :email, presence: true, "valid_email_2/email": { disposable: true }
+
+      def initialize(attributes = {})
+        @submitted_params = attributes.deep_symbolize_keys.slice(:email, :name, :public_participation, :tos_agreement)
+
+        super
+      end
+
+      attr_reader :submitted_params
+
+      private
+
+      # Add other responses to the context so AnswerForm can validate conditional questions
+      def before_validation
+        context.responses = attributes[:responses]
+      end
+    end
+  end
+end

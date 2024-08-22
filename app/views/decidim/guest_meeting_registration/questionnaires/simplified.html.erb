@@ -1,0 +1,86 @@
+<% add_decidim_meta_tags({
+                           title: translated_attribute(meeting.title),
+                           description: translated_attribute(meeting.description),
+                         }) %>
+
+<% columns = 6 %>
+
+<div class="row columns">
+  <h2 class="section-heading"><%= translated_attribute meeting.title %></h2>
+</div>
+
+<div class="row">
+  <div class="columns large-<%= columns %> medium-centered">
+    <div class="card">
+      <div class="card__content">
+        <% if meeting.registrations_enabled? && meeting.has_available_slots? %>
+            <% if  visitor_already_answered? %>
+              <div class="section">
+                <div class="callout success">
+                  <h3 class="heading5"><%= t("questionnaire_answered.title", scope: "decidim.forms.questionnaires.show") %></h3>
+                  <p><%= t("questionnaire_answered.body", scope: "decidim.forms.questionnaires.show") %></p>
+                </div>
+              </div>
+            <% else %>
+              <div class="answer-questionnaire">
+                <noscript>
+                  <div class="section">
+                    <div class="callout warning">
+                      <h3 class="heading5"><%= t("questionnaire_js_disabled.title", scope: "decidim.forms.questionnaires.show") %></h3>
+                      <p><%= t("questionnaire_js_disabled.body", scope: "decidim.forms.questionnaires.show") %></p>
+                    </div>
+                  </div>
+                </noscript>
+                <% unless current_participatory_space.can_participate?(current_user) %>
+                  <div class="section">
+                    <div class="callout alert">
+                      <h3 class="heading5"><%= t("questionnaire_for_private_users.title", scope: "decidim.forms.questionnaires.show") %></h3>
+                      <p><%= t("questionnaire_for_private_users.body", scope: "decidim.forms.questionnaires.show") %></p>
+                    </div>
+                  </div>
+                <% end %>
+
+                <%= decidim_form_for(@form, url: update_url, method: :post, html: { multipart: true, class: "form answer-questionnaire" }, data: { "safe-path" => form_path }) do |form| %>
+                  <%= form_required_explanation %>
+                  <%= invisible_captcha %>
+                    <div id="step-0" class="questionnaire-step" data-toggler=".hide">
+                        <div class="row column">
+                          <%= form.email_field :email %>
+                          <%= form.text_field :name %>
+                        </div>
+
+                        <% if show_public_participation? %>
+                          <div class="row column public-participation">
+                            <%= cell("decidim/public_participation", form) %>
+                          </div>
+                        <% end %>
+                        <div class="row column tos-agreement">
+                          <%= form.check_box :tos_agreement, label: t("tos_agreement", scope: "decidim.forms.questionnaires.show"),
+                                             id: "questionnaire_tos_agreement",
+                                             label_options: { for:  "questionnaire_tos_agreement" },
+                                             include_hidden: false %>
+                          <div class="help-text">
+
+                          </div>
+                        </div>
+
+                      <%= cell(
+                            "decidim/forms/step_navigation",
+                            0,
+                            total_steps: 1,
+                            button_disabled: !current_participatory_space.can_participate?(current_user),
+                            form: form
+                          ) %>
+                    </div>
+                <% end %>
+              </div>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :js_content do %>
+  <%= javascript_pack_tag "decidim_forms" %>
+<% end %>

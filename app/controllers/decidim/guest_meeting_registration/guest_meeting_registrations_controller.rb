@@ -5,13 +5,15 @@ module Decidim
     class GuestMeetingRegistrationsController < Decidim::Meetings::ApplicationController
       include Decidim::Forms::Concerns::HasQuestionnaire
 
+      helper_method :meeting
+
       def create
-        @form = form(Decidim::GuestMeetingRegistration::QuestionnaireForm).from_model(questionnaire)
-        render template: "decidim/guest_meeting_registration/questionnaires/show"
+        @form = registration_form.from_model(questionnaire)
+        render template: template
       end
 
       def answer
-        @form = form(Decidim::GuestMeetingRegistration::QuestionnaireForm).from_params(params, session_token: session_token)
+        @form = registration_form.from_params(params, session_token: session_token)
 
         Decidim::GuestMeetingRegistration::CreateMeetingRequest.call(meeting, @form) do
           on(:ok) do
@@ -21,17 +23,50 @@ module Decidim
 
           on(:invalid) do
             flash.now[:alert] = I18n.t("registrations.create.invalid", scope: "decidim.meetings")
-            render template: "decidim/guest_meeting_registration/questionnaires/show"
+            render template: template
           end
 
           on(:invalid_form) do
             flash.now[:alert] = I18n.t("answer.invalid", scope: i18n_flashes_scope)
-            render template: "decidim/guest_meeting_registration/questionnaires/show"
+            render template: template
           end
         end
       end
 
       private
+
+      def visitor_already_answered?
+        if meeting.registration_form_enabled?
+          questionnaire.answered_by?(current_user || session_token)
+        else
+          Decidim::GuestMeetingRegistration::RegistrationRequest.exists?(session_token: session_token)
+        end
+      end
+
+      def tokenize(id, length: 10)
+        tokenizer = if meeting.registration_form_enabled?
+                      Decidim::Tokenizer.new(salt: questionnaire.salt || questionnaire.id, length: length)
+                    else
+                      Decidim::Tokenizer.new(salt: meeting.id.to_s, length: length)
+                    end
+        tokenizer.int_digest(id).to_s
+      end
+
+      def template
+        if meeting.registration_form_enabled?
+          "decidim/guest_meeting_registration/questionnaires/show"
+        else
+          "decidim/guest_meeting_registration/questionnaires/simplified"
+        end
+      end
+
+      def registration_form
+        if meeting.registration_form_enabled?
+          form(Decidim::GuestMeetingRegistration::QuestionnaireForm)
+        else
+          form(Decidim::GuestMeetingRegistration::SimpleForm)
+        end
+      end
 
       # You can implement this method in your controller to change the URL
       # where the questionnaire will be submitted.
