@@ -25,7 +25,7 @@ module Decidim
       attr_reader :user, :registration_request
 
       delegate :meeting, to: :registration_request
-      delegate :questionnaire, to: :meeting
+      delegate :questionnaire, :organization, :component, :participatory_space, to: :meeting
       delegate :enable_cancellation?, to: :meeting_registration_settings
 
       def send_cancellation_link!
@@ -33,7 +33,7 @@ module Decidim
       end
 
       def meeting_registration_settings
-        @meeting_registration_settings ||= Decidim::GuestMeetingRegistration::Setting.where(organization: current_organization).first_or_create
+        @meeting_registration_settings ||= Decidim::GuestMeetingRegistration::Setting.where(organization: organization).first_or_create
       end
 
       def registration_form
@@ -49,18 +49,23 @@ module Decidim
 
       def form_context
         {
-          current_organization: current_organization,
-          current_component: current_component,
-          current_user: current_user,
-          current_participatory_space: current_participatory_space,
+          current_organization: organization,
+          current_component: component,
+          current_user: registration_request.user,
+          current_participatory_space: participatory_space,
           session_token: session_token
         }
       end
 
       # token is used as a substitute of user_id if unregistered
       def session_token
-        id = current_user&.id
-        session_id = request.session[:session_id] if request&.session
+        id = registration_request.user&.id
+
+        session_id = if respond_to?(:request) && request&.session
+                       request.session[:session_id]
+                     else
+                       SecureRandom.hex
+                     end
 
         return nil unless id || session_id
 
@@ -73,12 +78,12 @@ module Decidim
       end
 
       def create_user
-        @user = current_organization.users.where(email: registration_form.email).first_or_initialize
+        @user = organization.users.where(email: registration_form.email).first_or_initialize
         return if user.persisted?
 
         user.email = registration_form.email
         user.name = registration_form.name
-        user.nickname = UserBaseEntity.nicknamize(registration_form.name, organization: current_organization)
+        user.nickname = UserBaseEntity.nicknamize(registration_form.name, organization: organization)
         user.skip_confirmation!
         user.tos_agreement = "1"
         user.password = SecureRandom.hex

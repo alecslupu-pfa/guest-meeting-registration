@@ -34,7 +34,7 @@ module Decidim
       end
 
       def i18n_join_text
-        return I18n.t("join", scope: "decidim.meetings.meetings.show") if has_available_slots?
+        return I18n.t("join", scope: "decidim.guest_meeting_registration.join_meeting_button") if has_available_slots?
 
         I18n.t("no_slots_available", scope: "decidim.meetings.meetings.show")
       end

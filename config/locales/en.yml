@@ -32,7 +32,12 @@ en:
           subject: Confirm your email to attend %{meeting_title}
       join_meeting_button:
         cancel: Cancel
-        i_have_account: I have an account
-        login_as_guest: Login as guest
+        description_html: If you have an account, or you want to contribute further
+          to this Meeting, chose the <strong>%{i_have_account}</strong> option. Otherwise
+          you can choose <strong>%{login_as_guest}</strong>
+        i_have_account: Join with account
+        join: Join the meeting
+        login_as_guest: Join as guest
+        title: Please choose a way of joining
       menu:
         guest_meeting_registration_settings: Guest meeting settings
