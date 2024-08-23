@@ -42,6 +42,17 @@ describe "Admin manages registration settings", type: :system do
     expect { visit cancellation_url(registration.cancellation_token) }.to change(Decidim::GuestMeetingRegistration::RegistrationRequest, :count).by(-1)
   end
 
+  it "displays a success message" do
+    visit cancellation_url(registration.cancellation_token)
+    expect(page).to have_content(I18n.t("cancellation.success", scope: "decidim.guest_meeting_registration"))
+  end
+
+  it "displays an error message" do
+    visit cancellation_url(registration.cancellation_token)
+    visit cancellation_url(registration.cancellation_token)
+    expect(page).to have_content(I18n.t("cancellation.error", scope: "decidim.guest_meeting_registration"))
+  end
+
   it "cancels the follow" do
     expect { visit cancellation_url(registration.cancellation_token) }.to change(Decidim::Follow, :count).by(-1)
   end
@@ -52,12 +63,12 @@ describe "Admin manages registration settings", type: :system do
 
   it "raise error if token not found" do
     visit cancellation_url("invalid_token")
-    expect(page).to have_content("ActiveRecord::RecordNotFound")
+    expect(page).to have_content(I18n.t("cancellation.error", scope: "decidim.guest_meeting_registration"))
   end
 
   it "raise error if token exists, but not belongs to correct meeting" do
     registration = create(:guest_meeting_registration, organization: organization)
     visit cancellation_url(registration.cancellation_token)
-    expect(page).to have_content("ActiveRecord::RecordNotFound")
+    expect(page).to have_content(I18n.t("cancellation.error", scope: "decidim.guest_meeting_registration"))
   end
 end

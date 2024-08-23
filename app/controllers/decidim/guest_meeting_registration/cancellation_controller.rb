@@ -8,17 +8,17 @@ module Decidim
           organization: current_organization,
           meeting: meeting,
           cancellation_token: params[:id]
-        ).first!
+        ).first
 
-        Decidim::GuestMeetingRegistration::CancelRegistration.call(@registration_request) do
+        Decidim::GuestMeetingRegistration::CancelRegistration.call(@registration_request, meeting) do
           on(:ok) do
             flash[:notice] = I18n.t("cancellation.success", scope: "decidim.guest_meeting_registration")
-            redirect_to Decidim::EngineRouter.main_proxy(@registration_request.component).meeting_path(@registration_request.meeting)
+            redirect_to Decidim::EngineRouter.main_proxy(@meeting.component).meeting_path(@meeting)
           end
 
           on(:invalid) do
             flash[:alert] = I18n.t("cancellation.error", scope: "decidim.guest_meeting_registration")
-            redirect_to Decidim::EngineRouter.main_proxy(@registration_request.component).meeting_path(@registration_request.meeting)
+            redirect_to Decidim::EngineRouter.main_proxy(@meeting.component).meeting_path(@meeting)
           end
         end
       end
