@@ -23,19 +23,20 @@ FactoryBot.define do
 
   factory :guest_meeting_registration, class: "Decidim::GuestMeetingRegistration::RegistrationRequest" do
     organization
-    meeting { create(:meeting, component: create(:meeting_component, organization: organization ) ) }
+    meeting { create(:meeting, component: create(:meeting_component, organization: organization)) }
     email { generate(:email) }
     name { generate(:name) }
     cancellation_token { SecureRandom.hex }
-
-    trait :with_user do
-      user { create(:user, organization: organization, extended_data: { attend_meetings: true } ) }
-    end
+    user { create(:user, organization: organization, extended_data: { attend_meetings: true }) }
 
     trait :confirmed do
       confirmation_token { SecureRandom.hex }
-      confirmed_at { Time.zone .now }
+      confirmed_at { Time.zone.now }
+    end
+
+    after(:create) do |registration|
+      create(:registration, user: registration.user, meeting: registration.meeting)
+      create(:follow, user: registration.user, followable: registration.meeting)
     end
   end
-
 end
