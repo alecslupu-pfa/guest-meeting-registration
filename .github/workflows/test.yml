@@ -19,7 +19,13 @@ jobs:
       fail-fast: false
       matrix:
         folder:
-          - "spec/system"
+          - "spec/serializers"
+          - "spec/system/admin_manages_settings_spec.rb"
+          - "spec/system/guest_is_cancelling_registration_spec.rb"
+          - "spec/system/guest_is_confirming_request_spec.rb"
+          - "spec/system/guest_is_registering_spec.rb"
+          - "spec/system/show_meeting_spec.rb"
+          - "spec/system/show_meeting_with_guests_enabled_spec.rb"
     uses: ./.github/workflows/test_app.yml
     secrets: inherit
     name: Testing ${{ matrix.folder }}
