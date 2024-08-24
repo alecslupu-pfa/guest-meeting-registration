@@ -31,7 +31,7 @@ describe "Guest user is creating an account", type: :system do
     end
 
     it "creates the account" do
-      expect(registration.reload.user.extended_data).to eq({ attend_meetings: true })
+      expect(registration.reload.user.extended_data).to eq({ "attend_meetings" => true })
 
       fill_registration_form(name: registration.name, email: registration.email)
       page.check("registration_user_newsletter")
