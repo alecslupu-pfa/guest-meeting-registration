@@ -22,6 +22,10 @@ FactoryBot.define do
   end
 
   factory :guest_meeting_registration, class: "Decidim::GuestMeetingRegistration::RegistrationRequest" do
+    transient do
+      create_registration { true }
+      create_follow { true }
+    end
     organization
     meeting { create(:meeting, component: create(:meeting_component, organization: organization)) }
     email { generate(:email) }
@@ -38,10 +42,10 @@ FactoryBot.define do
       confirmed_at { Time.zone.now }
     end
 
-    after(:create) do |registration|
+    after(:create) do |registration, evaluator|
       if registration.user.present?
-        create(:registration, user: registration.user, meeting: registration.meeting)
-        create(:follow, user: registration.user, followable: registration.meeting)
+        create(:registration, user: registration.user, meeting: registration.meeting) if evaluator.create_registration == true
+        create(:follow, user: registration.user, followable: registration.meeting) if evaluator.create_follow == true
       end
     end
   end
