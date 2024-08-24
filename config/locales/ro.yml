@@ -7,33 +7,33 @@ ro:
     guest_meeting_registration:
       admin:
         guest_meeting_session:
-          enable_cancellation_help_html: Allow users to cancel their registration
-          enable_guest_registration_help_html: Allow guest users to register to meetings
-          enable_registration_confirmation_help_html: Force users to confirm their meeting registration
+          enable_cancellation_help_html: Permite utilizatorilor să-și anuleze participarea
+          enable_guest_registration_help_html: Permiteți utilizatorilor invitați să se înregistreze la ședințe
+          enable_registration_confirmation_help_html: Forțați utilizatorii să confirme participarea lor la ședințe
         guest_meeting_settings:
           edit:
             title: Meeting Guest Registration
-            update: Update
+            update: Actualizează
       cancellation:
-        error: There was a problem canceling your meeting registration
-        success: You have successfully cancelled your meeting registration
+        error: A apărut o problemă la anularea participării dvs. la ședință
+        success: Ați anulat cu succes participarea dvs. la ședință
       guest_meeting_registration_mailer:
         send_cancellation_request:
-          action: Cancel my registration
-          greeting: Welcome %{recipient}!
-          instruction: 'You can cancel meeting attendance at anytime accessing the link below:'
-          subject: Cancellation link for %{meeting_title}
+          action: Anulați participarea mea
+          greeting: Bine ați venit %{recipient}!
+          instruction: 'Poți anula participarea la ședință oricând, accesând linkul de mai jos:'
+          subject: Link de anulare pentru %{meeting_title}
         send_confirmation:
-          action: Confirm my registration
-          greeting: Welcome %{recipient}!
-          instruction: 'You can confirm your email account through the link below:'
-          subject: Confirm your email to attend %{meeting_title}
+          action: Confirmați participarea mea
+          greeting: Bine ați venit %{recipient}!
+          instruction: 'Puteți confirma adresa dvs. de e-mail prin link-ul de mai jos:'
+          subject: Confirmați e-mailul dvs. pentru a participa la %{meeting_title}
       join_meeting_button:
-        cancel: Cancel
-        description_html: If you have an account, or you want to contribute further to this Meeting, chose the <strong>%{i_have_account}</strong> option. Otherwise you can choose <strong>%{login_as_guest}</strong>
-        i_have_account: Join with account
-        join: Join the meeting
-        login_as_guest: Join as guest
-        title: Please choose a way of joining
+        cancel: Anulați
+        description_html: Dacă aveți un cont sau doriți să contribuiți în continuare la această întâlnire, alegeți opțiunea <strong>%{i_have_account}</strong>. Altfel puteți alege <strong>%{login_as_guest}</strong>
+        i_have_account: Participați folosind un cont
+        join: Participați la ședință
+        login_as_guest: Participați ca vizitator
+        title: Vă rugăm să alegeți o modalitate de a participa
       menu:
-        guest_meeting_registration_settings: Guest meeting settings
+        guest_meeting_registration_settings: Setările ședințelor anonime
