@@ -4,6 +4,7 @@ module Decidim
   module GuestMeetingRegistration
     class SimpleForm < Decidim::Form
       include ActiveModel::Validations::Callbacks
+      delegate :meeting, to: :context
 
       attribute :email
       attribute :name
@@ -29,7 +30,7 @@ module Decidim
       private
 
       def meeting_input
-        errors.add(:email, :taken) if Decidim::GuestMeetingRegistration::RegistrationRequest.exists?(
+        errors.add(:email, :taken) if Decidim::GuestMeetingRegistration::RegistrationRequest.where.not(id: id).exists?(
           meeting: meeting,
           organization: current_organization,
           email: email

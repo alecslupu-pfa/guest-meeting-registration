@@ -3,11 +3,13 @@
 module Decidim
   module GuestMeetingRegistration
     class CreateRegistration < Decidim::Command
-      def initialize(registration_request)
+      def initialize(registration_request, meeting)
         @registration_request = registration_request
+        @meeting = meeting
       end
 
       def call
+        return broadcast(:invalid) if registration_request.blank?
         return broadcast(:invalid_form) unless registration_form.valid?
         return broadcast(:invalid) unless meeting.registrations_enabled? && meeting.has_available_slots?
 
@@ -22,9 +24,9 @@ module Decidim
 
       private
 
-      attr_reader :user, :registration_request
+      attr_reader :user, :registration_request, :meeting
 
-      delegate :meeting, :session_token, to: :registration_request
+      delegate :session_token, to: :registration_request
       delegate :questionnaire, :organization, :component, :participatory_space, to: :meeting
       delegate :enable_cancellation?, to: :meeting_registration_settings
 
@@ -37,7 +39,21 @@ module Decidim
       end
 
       def registration_form
-        @registration_form ||= Decidim::GuestMeetingRegistration::QuestionnaireForm.from_params(registration_request.form_data).with_context(form_context)
+        @registration_form ||= begin
+          form_data = registration_request.form_data.with_indifferent_access
+          form_data.merge!({ id: registration_request.id })
+          form = form_object.from_params(form_data, **form_context)
+          form.map_model(registration_request)
+          form
+        end
+      end
+
+      def form_object
+        @form_object ||= if meeting.registration_form_enabled?
+                           form(Decidim::GuestMeetingRegistration::QuestionnaireForm)
+                         else
+                           form(Decidim::GuestMeetingRegistration::SimpleForm)
+                         end
       end
 
       def add_user_to_request!
@@ -53,7 +69,8 @@ module Decidim
           current_component: component,
           current_user: registration_request.user,
           current_participatory_space: participatory_space,
-          session_token: session_token
+          session_token: session_token,
+          meeting: meeting
         }
       end
 

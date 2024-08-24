@@ -28,7 +28,7 @@ module Decidim
 
       private
 
-      attr_reader :meeting, :registration_form, :registration_request
+      attr_reader :meeting, :form_object, :registration_request
 
       delegate :enable_registration_confirmation?, to: :meeting_registration_settings
 

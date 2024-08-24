@@ -7,7 +7,7 @@ describe "Admin manages registration settings", type: :system do
   let(:manifest_name) { "meetings" }
   let!(:meeting) { create :meeting, :published, component: component }
   let!(:guest_meeting_registration_settings) { create(:guest_meeting_registration_settings, enable_guest_registration: true, enable_cancellation: true, organization: organization) }
-  let!(:registration) { create(:guest_meeting_registration, organization: organization, meeting: meeting) }
+  let!(:registration) { create(:guest_meeting_registration, :with_user, organization: organization, meeting: meeting) }
 
   before do
     meeting.update!(

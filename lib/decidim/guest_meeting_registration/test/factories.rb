@@ -27,16 +27,22 @@ FactoryBot.define do
     email { generate(:email) }
     name { generate(:name) }
     cancellation_token { SecureRandom.hex }
-    user { create(:user, organization: organization, extended_data: { attend_meetings: true }) }
+    confirmation_token { SecureRandom.hex }
+    form_data { { name: name, email: email, tos_agreement: true } }
+
+    trait :with_user do
+      user { create(:user, organization: organization, extended_data: { attend_meetings: true }) }
+    end
 
     trait :confirmed do
-      confirmation_token { SecureRandom.hex }
       confirmed_at { Time.zone.now }
     end
 
     after(:create) do |registration|
-      create(:registration, user: registration.user, meeting: registration.meeting)
-      create(:follow, user: registration.user, followable: registration.meeting)
+      if registration.user.present?
+        create(:registration, user: registration.user, meeting: registration.meeting)
+        create(:follow, user: registration.user, followable: registration.meeting)
+      end
     end
   end
 end

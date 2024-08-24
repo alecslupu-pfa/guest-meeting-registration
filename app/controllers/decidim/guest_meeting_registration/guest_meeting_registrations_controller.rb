@@ -4,16 +4,15 @@ module Decidim
   module GuestMeetingRegistration
     class GuestMeetingRegistrationsController < Decidim::Meetings::ApplicationController
       include Decidim::Forms::Concerns::HasQuestionnaire
-
-      helper_method :meeting
+      include Decidim::GuestMeetingRegistration::HasQuestionnaire
 
       def create
-        @form = registration_form.from_model(questionnaire)
+        @form = form_object.from_model(questionnaire)
         render template: template
       end
 
       def answer
-        @form = registration_form.from_params(params, session_token: session_token, meeting: meeting)
+        @form = form_object.from_params(params, session_token: session_token, meeting: meeting)
 
         Decidim::GuestMeetingRegistration::CreateMeetingRequest.call(meeting, @form) do
           on(:ok) do
@@ -35,51 +34,16 @@ module Decidim
 
       private
 
-      def visitor_already_answered?
-        if meeting.registration_form_enabled?
-          questionnaire.answered_by?(current_user || session_token)
-        else
-          Decidim::GuestMeetingRegistration::RegistrationRequest.exists?(session_token: session_token)
-        end
-      end
-
-      def tokenize(id, length: 10)
-        tokenizer = if meeting.registration_form_enabled?
-                      Decidim::Tokenizer.new(salt: questionnaire.salt || questionnaire.id, length: length)
-                    else
-                      Decidim::Tokenizer.new(salt: meeting.id.to_s, length: length)
-                    end
-        tokenizer.int_digest(id).to_s
-      end
-
-      def template
-        if meeting.registration_form_enabled?
-          "decidim/guest_meeting_registration/questionnaires/show"
-        else
-          "decidim/guest_meeting_registration/questionnaires/simplified"
-        end
-      end
-
-      def registration_form
-        if meeting.registration_form_enabled?
-          form(Decidim::GuestMeetingRegistration::QuestionnaireForm)
-        else
-          form(Decidim::GuestMeetingRegistration::SimpleForm)
-        end
-      end
-
-      # You can implement this method in your controller to change the URL
-      # where the questionnaire will be submitted.
-      def update_url
-        "#{form_path}/guest-registration/answer"
+      def form_object
+        @form_object ||= if meeting.registration_form_enabled?
+                           form(Decidim::GuestMeetingRegistration::QuestionnaireForm)
+                         else
+                           form(Decidim::GuestMeetingRegistration::SimpleForm)
+                         end
       end
 
       def after_answer_path
         form_path
-      end
-
-      def form_path
-        Decidim::EngineRouter.main_proxy(current_component).meeting_path(meeting)
       end
 
       def allow_unregistered?
