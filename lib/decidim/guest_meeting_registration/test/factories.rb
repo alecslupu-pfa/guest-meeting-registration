@@ -35,7 +35,7 @@ FactoryBot.define do
     form_data { { name: name, email: email, tos_agreement: true } }
 
     trait :with_user do
-      user { create(:user, organization: organization, extended_data: { attend_meetings: true }) }
+      user { create(:user, email: email, name: name, organization: organization, extended_data: { attend_meetings: true }) }
     end
 
     trait :confirmed do
