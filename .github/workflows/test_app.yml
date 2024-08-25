@@ -58,6 +58,13 @@ jobs:
         env:
           SIMPLECOV: 1
           CODECOV: 1
+          
+      - uses: codecov/codecov-action@v4
+        name: Upload coverage
+        with:
+          token: ${{ inputs.codecov_token }}
+          name: ${{ inputs.folder }}
+          flags: ${{ inputs.folder }}
 
       - uses: actions/upload-artifact@v2-preview
         if: always()
