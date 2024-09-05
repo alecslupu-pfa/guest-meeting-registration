@@ -25,6 +25,12 @@ module Decidim
       def guest_data
         Decidim::GuestMeetingRegistration::RegistrationRequest.exists?(meeting: resource.meeting, user: resource.user) ? "Yes" : "No"
       end
+
+      def serialize_answers
+        return super if resource.meeting.questionnaire.present?
+
+        []
+      end
     end
   end
 end

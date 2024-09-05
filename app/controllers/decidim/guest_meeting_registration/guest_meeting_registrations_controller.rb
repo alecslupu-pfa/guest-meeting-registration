@@ -35,11 +35,15 @@ module Decidim
       private
 
       def form_object
-        @form_object ||= if meeting.registration_form_enabled?
+        @form_object ||= if valid_questionnaire?
                            form(Decidim::GuestMeetingRegistration::QuestionnaireForm)
                          else
                            form(Decidim::GuestMeetingRegistration::SimpleForm)
                          end
+      end
+
+      def valid_questionnaire?
+        meeting.registration_form_enabled? && questionnaire.present?
       end
 
       def after_answer_path

@@ -30,7 +30,7 @@ module Decidim
         end
 
         def visitor_already_answered?
-          if meeting.registration_form_enabled?
+          if valid_questionnaire?
             questionnaire.answered_by?(current_user || session_token)
           else
             Decidim::GuestMeetingRegistration::RegistrationRequest.exists?(session_token: session_token)
@@ -38,7 +38,7 @@ module Decidim
         end
 
         def tokenize(id, length: 10)
-          tokenizer = if meeting.registration_form_enabled?
+          tokenizer = if valid_questionnaire?
                         Decidim::Tokenizer.new(salt: questionnaire.salt || questionnaire.id, length: length)
                       else
                         Decidim::Tokenizer.new(salt: meeting.id.to_s, length: length)
@@ -47,7 +47,7 @@ module Decidim
         end
 
         def template
-          if meeting.registration_form_enabled?
+          if valid_questionnaire?
             "decidim/guest_meeting_registration/questionnaires/show"
           else
             "decidim/guest_meeting_registration/questionnaires/simplified"
