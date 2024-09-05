@@ -47,7 +47,7 @@ module Decidim
         registration_request.meeting = meeting
         registration_request.email = registration_form.email
         registration_request.name = registration_form.name
-        registration_request.form_data = registration_form.submitted_params
+        registration_request.form_data = { questionnaire: registration_form.submitted_params }
         registration_request.cancellation_token = SecureRandom.hex
         registration_request.session_token = registration_form.context&.session_token
 
