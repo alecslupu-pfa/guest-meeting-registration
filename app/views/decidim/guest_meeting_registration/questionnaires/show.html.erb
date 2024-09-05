@@ -102,7 +102,9 @@
 
                         <% if show_public_participation? %>
                           <div class="row column public-participation">
-                            <%= cell("decidim/public_participation", form) %>
+                            <%= form.check_box :public_participation,
+                                               label: t("public_participation", scope: "decidim.shared.public_participation"),
+                                               include_hidden: false %>
                           </div>
                         <% end %>
                         <div class="row column tos-agreement">

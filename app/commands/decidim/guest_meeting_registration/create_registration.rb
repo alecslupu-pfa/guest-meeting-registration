@@ -41,18 +41,22 @@ module Decidim
       def registration_form
         @registration_form ||= begin
           form_data = registration_request.form_data.with_indifferent_access
-          form_data.merge!({ id: registration_request.id })
-          form = form_object.from_params(form_data, **form_context)
-          form.map_model(registration_request)
+          form_data.merge!({ id: questionnaire.id })
+          form = form_object.from_params(form_data).with_context(form_context)
+          form.map_model(questionnaire)
           form
         end
       end
 
+      def questionnaire
+        @questionnaire ||= Decidim::Forms::Questionnaire.includes(questions: :answer_options).find_by(questionnaire_for: meeting)
+      end
+
       def form_object
         @form_object ||= if meeting.registration_form_enabled?
-                           form(Decidim::GuestMeetingRegistration::QuestionnaireForm)
+                           Decidim::GuestMeetingRegistration::QuestionnaireForm
                          else
-                           form(Decidim::GuestMeetingRegistration::SimpleForm)
+                           Decidim::GuestMeetingRegistration::SimpleForm
                          end
       end
 
