@@ -31,8 +31,8 @@ ro:
       join_meeting_button:
         cancel: Anulați
         cancel_guest_confirm:
-          leave: Cancel your registration
-          leave_confirmation: Are you sure you want to cancel your registration for this meeting?
+          leave: Anulați participarea mea
+          leave_confirmation: Sigur doriți să anulați participarea la această întâlnire?
         description_html: Dacă aveți un cont sau doriți să contribuiți în continuare la această întâlnire, alegeți opțiunea <strong>%{i_have_account}</strong>. Altfel puteți alege <strong>%{login_as_guest}</strong>
         i_have_account: Participați folosind un cont
         join: Participați la ședință
