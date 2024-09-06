@@ -34,6 +34,10 @@ module Decidim
 
       private
 
+      def valid_questionnaire?
+        meeting.registration_form_enabled? && questionnaire.present?
+      end
+
       def show_public_participation?
         true
       end

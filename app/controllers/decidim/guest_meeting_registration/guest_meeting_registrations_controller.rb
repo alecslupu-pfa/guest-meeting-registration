@@ -42,6 +42,10 @@ module Decidim
                          end
       end
 
+      def valid_questionnaire?
+        meeting.registration_form_enabled? && questionnaire.present?
+      end
+
       def after_answer_path
         form_path
       end
