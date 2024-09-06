@@ -30,6 +30,9 @@ ro:
           subject: Confirmați e-mailul dvs. pentru a participa la %{meeting_title}
       join_meeting_button:
         cancel: Anulați
+        cancel_guest_confirm:
+          leave: Cancel your registration
+          leave_confirmation: Are you sure you want to cancel your registration for this meeting?
         description_html: Dacă aveți un cont sau doriți să contribuiți în continuare la această întâlnire, alegeți opțiunea <strong>%{i_have_account}</strong>. Altfel puteți alege <strong>%{login_as_guest}</strong>
         i_have_account: Participați folosind un cont
         join: Participați la ședință
