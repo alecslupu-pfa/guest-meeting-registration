@@ -22,4 +22,5 @@ ignore_missing:
   - decidim.forms.questionnaires.show.current_step
   - decidim.forms.questionnaires.show.of_total_steps
   - decidim.forms.questionnaires.answer.invalid
+  - decidim.shared.flag_modal.close
   - decidim.shared.public_participation.public_participation

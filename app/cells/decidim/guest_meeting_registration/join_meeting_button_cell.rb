@@ -3,6 +3,8 @@
 module Decidim
   module GuestMeetingRegistration
     class JoinMeetingButtonCell < Decidim::ViewModel
+      include Decidim::GuestMeetingRegistration::HasToken
+
       delegate :enable_guest_registration?, to: :meeting_registration_settings, prefix: false
       delegate :on_different_platform?, :has_available_slots?, :registration_form_enabled?, :registrations_enabled?, :remaining_slots, to: :model, prefix: false
       delegate :current_user, to: :controller, prefix: false
@@ -19,9 +21,7 @@ module Decidim
 
       private
 
-      def guest_registration_path
-        Decidim::EngineRouter.main_proxy(current_component).decidim_guest_meeting_registration_path(meeting_id: model.id)
-      end
+      alias meeting model
 
       def button_classes
         "button expanded button--sc"
@@ -47,6 +47,18 @@ module Decidim
 
       def meeting_registration_settings
         @meeting_registration_settings ||= Decidim::GuestMeetingRegistration::Setting.where(organization: current_organization).first_or_create
+      end
+
+      def guest_registration_path
+        Decidim::EngineRouter.main_proxy(current_component).decidim_guest_meeting_registration_path(meeting_id: model.id)
+      end
+
+      def cancellation_url
+        "#{guest_registration_path}/cancellation/#{cancellation_token}"
+      end
+
+      def cancellation_token
+        @cancellation_token ||= Decidim::GuestMeetingRegistration::RegistrationRequest.where(meeting: meeting, session_token: session_token).first.try(:cancellation_token)
       end
     end
   end

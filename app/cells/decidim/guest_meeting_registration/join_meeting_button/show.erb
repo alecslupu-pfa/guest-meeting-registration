@@ -1,5 +1,12 @@
-<%= render :join_guest_confirm %>
-<%= button_tag(i18n_join_text, class: button_classes, disabled: !has_available_slots?, data: { open: "guest-meeting-registration-join-#{model.id}" } ) %>
+<% unless visitor_already_answered? %>
+  <%= render :join_guest_confirm %>
+  <%= button_tag(i18n_join_text, class: button_classes, disabled: !has_available_slots?, data: { open: "guest-meeting-registration-join-#{model.id}" } ) %>
+<% else %>
+  <% if visitor_already_answered? %>
+    <%= render :cancel_guest_confirm %>
+    <%= button_tag( t("leave", scope: "decidim.guest_meeting_registration.join_meeting_button.cancel_guest_confirm"), class: button_classes, data: { open: "guest-meeting-cancelation-confirm-#{model.id}" } ) %>
+  <% end %>
+<% end %>
 
 <% if shows_remaining_slots? %>
   <span><%= t("remaining_slots", scope: "decidim.meetings.meetings.show", count: remaining_slots) %></span>
