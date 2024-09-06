@@ -1,5 +1,5 @@
 ---
-de-AT:
+de:
   decidim:
     components:
       guest_meeting_registration:
@@ -30,6 +30,9 @@ de-AT:
           subject: Confirm your email to attend %{meeting_title}
       join_meeting_button:
         cancel: Cancel
+        cancel_guest_confirm:
+          leave: Cancel your registration
+          leave_confirmation: Are you sure you want to cancel your registration for this meeting?
         description_html: If you have an account, or you want to contribute further to this Meeting, chose the <strong>%{i_have_account}</strong> option. Otherwise you can choose <strong>%{login_as_guest}</strong>
         i_have_account: Join with account
         join: Join the meeting
