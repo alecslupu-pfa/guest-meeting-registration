@@ -1,6 +1,10 @@
 <% unless visitor_already_answered? %>
   <%= render :join_guest_confirm %>
-  <%= button_tag(i18n_join_text, class: button_classes, disabled: !has_available_slots?, data: { open: "guest-meeting-registration-join-#{model.id}" } ) %>
+  <% if disable_account_confirmation? %>
+    <%= link_to(t("login_as_guest", scope: "decidim.guest_meeting_registration.join_meeting_button"), guest_registration_path, class: button_classes, disabled: !has_available_slots? ) %>
+  <% else %>
+    <%= button_tag(i18n_join_text, class: button_classes, disabled: !has_available_slots?, data: { open: "guest-meeting-registration-join-#{model.id}" } ) %>
+  <% end %>
 <% else %>
   <% if visitor_already_answered? %>
     <%= render :cancel_guest_confirm %>

@@ -32,7 +32,8 @@ module Decidim
           {
             enable_guest_registration: form.enable_guest_registration,
             enable_registration_confirmation: form.enable_registration_confirmation,
-            enable_cancellation: form.enable_cancellation
+            enable_cancellation: form.enable_cancellation,
+            disable_account_confirmation: form.disable_account_confirmation
           }
         end
       end

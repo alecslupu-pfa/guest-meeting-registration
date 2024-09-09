@@ -15,6 +15,9 @@
           <div class="field">
             <%= f.check_box :enable_cancellation, help_text: t("enable_cancellation_help_html", scope:"decidim.guest_meeting_registration.admin.guest_meeting_session") %>
           </div>
+          <div class="field">
+            <%= f.check_box :disable_account_confirmation, help_text: t("disable_account_confirmation_html", scope:"decidim.guest_meeting_registration.admin.guest_meeting_session") %>
+          </div>
         </div>
       </div>
     </div>

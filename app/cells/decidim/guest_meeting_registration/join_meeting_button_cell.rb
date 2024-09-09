@@ -5,7 +5,7 @@ module Decidim
     class JoinMeetingButtonCell < Decidim::ViewModel
       include Decidim::GuestMeetingRegistration::HasToken
 
-      delegate :enable_guest_registration?, to: :meeting_registration_settings, prefix: false
+      delegate :enable_guest_registration?, :disable_account_confirmation?, to: :meeting_registration_settings, prefix: false
       delegate :on_different_platform?, :has_available_slots?, :registration_form_enabled?, :registrations_enabled?, :remaining_slots, to: :model, prefix: false
       delegate :current_user, to: :controller, prefix: false
       delegate_missing_to :controller
