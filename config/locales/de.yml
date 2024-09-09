@@ -1,5 +1,5 @@
 ---
-de-AT:
+de:
   decidim:
     components:
       guest_meeting_registration:
@@ -7,13 +7,13 @@ de-AT:
     guest_meeting_registration:
       admin:
         guest_meeting_session:
-          enable_cancellation_help_html: Allow users to cancel their registration
-          enable_guest_registration_help_html: Allow guest users to register to meetings
+          enable_cancellation_help_html: Nutzenden erlauben, die Teilnahme an der Veranstaltung abzusagen
+          enable_guest_registration_help_html: Anmeldungen für Veranstaltungen ohne Plattformregistrierung erlauben
           enable_registration_confirmation_help_html: Force users to confirm their meeting registration
         guest_meeting_settings:
           edit:
             title: Meeting Guest Registration
-            update: Update
+            update: Aktualisieren
       cancellation:
         error: There was a problem canceling your meeting registration
         success: You have successfully cancelled your meeting registration
@@ -34,9 +34,9 @@ de-AT:
           leave: Cancel your registration
           leave_confirmation: Are you sure you want to cancel your registration for this meeting?
         description_html: If you have an account, or you want to contribute further to this Meeting, chose the <strong>%{i_have_account}</strong> option. Otherwise you can choose <strong>%{login_as_guest}</strong>
-        i_have_account: Join with account
+        i_have_account: Mit Konto anmelden
         join: Join the meeting
-        login_as_guest: Join as guest
+        login_as_guest: Als Gast anmelden
         title: Please choose a way of joining
       menu:
         guest_meeting_registration_settings: Guest meeting settings
