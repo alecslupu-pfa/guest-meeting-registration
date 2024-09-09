@@ -3,40 +3,40 @@ de:
   decidim:
     components:
       guest_meeting_registration:
-        name: GuestMeetingRegistration
+        name: Gastanmeldungen bei Veranstaltungen
     guest_meeting_registration:
       admin:
         guest_meeting_session:
           enable_cancellation_help_html: Nutzenden erlauben, die Teilnahme an der Veranstaltung abzusagen
           enable_guest_registration_help_html: Anmeldungen für Veranstaltungen ohne Plattformregistrierung erlauben
-          enable_registration_confirmation_help_html: Force users to confirm their meeting registration
+          enable_registration_confirmation_help_html: Teilnehmende zwingen, Ihre Anmeldung an einer Veranstaltung zu bestätigen
         guest_meeting_settings:
           edit:
-            title: Meeting Guest Registration
+            title: Gastanmeldungen für Veranstaltungen
             update: Aktualisieren
       cancellation:
-        error: There was a problem canceling your meeting registration
-        success: You have successfully cancelled your meeting registration
+        error: Bei der Abmeldung von der Veranstaltung ist ein Problem aufgetreten
+        success: Sie haben sich erfolgreich von der Veranstaltung abgemeldet
       guest_meeting_registration_mailer:
         send_cancellation_request:
-          action: Cancel my registration
-          greeting: Welcome %{recipient}!
-          instruction: 'You can cancel meeting attendance at anytime accessing the link below:'
-          subject: Cancellation link for %{meeting_title}
+          action: Abmelden
+          greeting: Willkommen %{recipient}!
+          instruction: 'Sie können die Teilnahme jederzeit absagen, indem Sie auf diesen Link klicken:'
+          subject: Abmeldungslink für %{meeting_title}
         send_confirmation:
-          action: Confirm my registration
-          greeting: Welcome %{recipient}!
-          instruction: 'You can confirm your email account through the link below:'
-          subject: Confirm your email to attend %{meeting_title}
+          action: Anmeldung bestätigen
+          greeting: Willkommen %{recipient}!
+          instruction: 'Bitte bestätigen Sie Ihre E-Mail-Adresse über den folgenden Link:'
+          subject: Bestätigen Sie Ihre E-Mail für die Teilnahme an %{meeting_title}
       join_meeting_button:
-        cancel: Cancel
+        cancel: Abbrechen
         cancel_guest_confirm:
-          leave: Cancel your registration
-          leave_confirmation: Are you sure you want to cancel your registration for this meeting?
-        description_html: If you have an account, or you want to contribute further to this Meeting, chose the <strong>%{i_have_account}</strong> option. Otherwise you can choose <strong>%{login_as_guest}</strong>
+          leave: Anmeldung stornieren
+          leave_confirmation: Sind Sie sicher dass Sie sich von dieser Veranstaltung abmelden möchten?
+        description_html: Wenn Sie bereits ein Konto haben oder weiter zu dieser Veranstaltung beitragen möchten, wählen Sie die <strong>%{i_have_account}</strong> Option. Ansonsten können Sie <strong>%{login_as_guest}</strong>
         i_have_account: Mit Konto anmelden
-        join: Join the meeting
+        join: Zur Veranstaltung anmelden
         login_as_guest: Als Gast anmelden
-        title: Please choose a way of joining
+        title: Wie möchten Sie sich anmelden?
       menu:
-        guest_meeting_registration_settings: Guest meeting settings
+        guest_meeting_registration_settings: Gastanmeldungseinstellungen
