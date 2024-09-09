@@ -7,6 +7,7 @@ de:
     guest_meeting_registration:
       admin:
         guest_meeting_session:
+          disable_account_confirmation_html: Disable pop-up asking people to choose whether they have or not an account
           enable_cancellation_help_html: Nutzenden erlauben, die Teilnahme an der Veranstaltung abzusagen
           enable_guest_registration_help_html: Anmeldungen für Veranstaltungen ohne Plattformregistrierung erlauben
           enable_registration_confirmation_help_html: Teilnehmende zwingen, Ihre Anmeldung an einer Veranstaltung zu bestätigen
