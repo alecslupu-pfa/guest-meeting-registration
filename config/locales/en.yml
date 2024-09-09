@@ -7,7 +7,8 @@ en:
     guest_meeting_registration:
       admin:
         guest_meeting_session:
-          disable_account_confirmation_html: Disable pop-up asking people to choose whether they have or not an account
+          disable_account_confirmation_html: Disable pop-up asking people to choose
+            whether they have or not an account
           enable_cancellation_help_html: Allow users to cancel their registration
           enable_guest_registration_help_html: Allow guest users to register to meetings
           enable_registration_confirmation_help_html: Force users to confirm their
