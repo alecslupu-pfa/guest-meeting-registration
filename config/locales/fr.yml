@@ -3,41 +3,41 @@ fr:
   decidim:
     components:
       guest_meeting_registration:
-        name: GuestMeetingRegistration
+        name: InscriptionAuxRencontresSansCompte
     guest_meeting_registration:
       admin:
         guest_meeting_session:
-          disable_account_confirmation_html: Disable pop-up asking people to choose whether they have or not an account
-          enable_cancellation_help_html: Allow users to cancel their registration
-          enable_guest_registration_help_html: Allow guest users to register to meetings
-          enable_registration_confirmation_help_html: Force users to confirm their meeting registration
+          disable_account_confirmation_html: Désactiver la popup demandant aux gens de choisir s'ils ont ou non un compte
+          enable_cancellation_help_html: Permettre aux utilisateurs d'annuler leur inscription
+          enable_guest_registration_help_html: Autoriser les utilisateurs non connectés à s'inscrire aux réunions
+          enable_registration_confirmation_help_html: Rentre la confirmation de l'inscription à l'évènement obligatoire
         guest_meeting_settings:
           edit:
-            title: Meeting Guest Registration
-            update: Update
+            title: Inscription à la rencontre sans connexion
+            update: Mettre à jour
       cancellation:
-        error: There was a problem canceling your meeting registration
-        success: You have successfully cancelled your meeting registration
+        error: Il y a eu un problème lors de l'annulation de votre inscription à la réunion
+        success: Vous avez annulé votre inscription à la réunion
       guest_meeting_registration_mailer:
         send_cancellation_request:
-          action: Cancel my registration
-          greeting: Welcome %{recipient}!
-          instruction: 'You can cancel meeting attendance at anytime accessing the link below:'
-          subject: Cancellation link for %{meeting_title}
+          action: Annuler mon inscription
+          greeting: Bienvenue %{recipient} !
+          instruction: 'Vous pouvez à tout moment annuler votre participation à la réunion en utilisant le lien ci-dessous :'
+          subject: Lien d'annulation pour %{meeting_title}
         send_confirmation:
-          action: Confirm my registration
-          greeting: Welcome %{recipient}!
-          instruction: 'You can confirm your email account through the link below:'
-          subject: Confirm your email to attend %{meeting_title}
+          action: Confirmer mon inscription
+          greeting: Bienvenue %{recipient} !
+          instruction: 'Vous pouvez confirmer votre adresse e-mail en cliquant sur le lien ci-dessous :'
+          subject: Confirmez votre e-mail pour participer à %{meeting_title}
       join_meeting_button:
-        cancel: Cancel
+        cancel: Annuler
         cancel_guest_confirm:
-          leave: Cancel your registration
-          leave_confirmation: Are you sure you want to cancel your registration for this meeting?
-        description_html: If you have an account, or you want to contribute further to this Meeting, chose the <strong>%{i_have_account}</strong> option. Otherwise you can choose <strong>%{login_as_guest}</strong>
-        i_have_account: Join with account
-        join: Join the meeting
-        login_as_guest: Join as guest
-        title: Please choose a way of joining
+          leave: Annuler votre inscription
+          leave_confirmation: Êtes-vous sûr de vouloir annuler votre inscription à cette rencontre ?
+        description_html: Si vous avez déjà un compte, choisissez l'option <strong>%{i_have_account}</strong> . Sinon, vous pouvez <strong>%{login_as_guest}</strong>
+        i_have_account: S'inscrire avec un compte Decidim
+        join: S'inscrire à la rencontre
+        login_as_guest: S'inscrire en tant qu'invité
+        title: Veuillez choisir un mode d'inscription
       menu:
-        guest_meeting_registration_settings: Guest meeting settings
+        guest_meeting_registration_settings: Paramètres des inscriptions des invités
