@@ -30,11 +30,7 @@ module Decidim
 
       attr_reader :meeting, :registration_form, :registration_request
 
-      delegate :enable_registration_confirmation?, to: :meeting_registration_settings
-
-      def meeting_registration_settings
-        @meeting_registration_settings ||= Decidim::GuestMeetingRegistration::Setting.where(organization: current_organization).first_or_create
-      end
+      delegate :enable_registration_confirmation?, to: :meeting
 
       def send_email_confirmation!
         registration_request.create_confirmation_code!

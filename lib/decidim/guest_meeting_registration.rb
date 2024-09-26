@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require "decidim/guest_meeting_registration/admin"
 require "decidim/guest_meeting_registration/engine"
-require "decidim/guest_meeting_registration/admin_engine"
 
 module Decidim
   # This namespace holds the logic of the `GuestMeetingRegistration` component. This component
@@ -10,6 +8,8 @@ module Decidim
   module GuestMeetingRegistration
     include ActiveSupport::Configurable
 
+    autoload :UpdateRegistrations, "decidim/guest_meeting_registration/update_registrations"
+    autoload :MeetingRegistrationForm, "decidim/guest_meeting_registration/meeting_registration_form"
     autoload :RegistrationSerializer, "decidim/guest_meeting_registration/registration_serializer"
     autoload :AccountRegistration, "decidim/guest_meeting_registration/account_registration"
 
