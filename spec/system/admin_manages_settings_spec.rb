@@ -13,9 +13,7 @@ describe "Admin manages registration settings", type: :system do
     Decidim::EngineRouter.admin_proxy(component).edit_meeting_registrations_path(meeting_id: meeting.id)
   end
 
-
   it "enables the registration settings" do
-
     visit registrations_edit_path
 
     check "Enable guest registration"

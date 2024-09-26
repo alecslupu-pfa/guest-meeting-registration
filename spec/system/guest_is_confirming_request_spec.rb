@@ -16,7 +16,6 @@ describe "Guest user is confirming the account", type: :system do
   end
   let!(:registration) { create(:guest_meeting_registration, organization: organization, meeting: meeting) }
 
-
   def meeting_path
     resource_locator(meeting).path
   end

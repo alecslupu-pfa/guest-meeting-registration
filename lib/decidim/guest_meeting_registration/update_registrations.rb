@@ -3,7 +3,6 @@
 module Decidim
   module GuestMeetingRegistration
     module UpdateRegistrations
-
       def update_meeting_registrations
         meeting.registrations_enabled = form.registrations_enabled
         meeting.registration_form_enabled = form.registration_form_enabled

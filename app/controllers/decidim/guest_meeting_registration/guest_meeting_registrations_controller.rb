@@ -65,7 +65,6 @@ module Decidim
       def meeting
         @meeting ||= Decidim::Meetings::Meeting.where(component: current_component).find(params[:meeting_id])
       end
-
     end
   end
 end
