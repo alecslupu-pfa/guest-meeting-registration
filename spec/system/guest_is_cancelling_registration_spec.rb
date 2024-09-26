@@ -5,8 +5,7 @@ require "spec_helper"
 describe "Admin manages registration settings", type: :system do
   include_context "with a component"
   let(:manifest_name) { "meetings" }
-  let!(:meeting) { create :meeting, :published, component: component }
-  let!(:guest_meeting_registration_settings) { create(:guest_meeting_registration_settings, enable_guest_registration: true, enable_cancellation: true, organization: organization) }
+  let!(:meeting) { create :meeting, :published, component: component, enable_guest_registration: true, enable_cancellation: true }
   let!(:registration) { create(:guest_meeting_registration, :with_user, organization: organization, meeting: meeting) }
 
   before do

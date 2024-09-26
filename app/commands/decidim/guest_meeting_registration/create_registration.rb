@@ -28,14 +28,10 @@ module Decidim
 
       delegate :session_token, to: :registration_request
       delegate :questionnaire, :organization, :component, :participatory_space, to: :meeting
-      delegate :enable_cancellation?, to: :meeting_registration_settings
+      delegate :enable_cancellation?, to: :meeting
 
       def send_cancellation_link!
         Decidim::GuestMeetingRegistration::SendCancellationJob.perform_later(registration_request.id)
-      end
-
-      def meeting_registration_settings
-        @meeting_registration_settings ||= Decidim::GuestMeetingRegistration::Setting.where(organization: organization).first_or_create
       end
 
       def registration_form
