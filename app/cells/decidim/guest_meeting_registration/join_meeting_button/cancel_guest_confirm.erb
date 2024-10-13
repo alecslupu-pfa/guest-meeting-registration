@@ -1,6 +1,6 @@
 <div class="reveal" data-reveal id="guest-meeting-cancelation-confirm-<%= model.id %>">
   <div class="reveal__header">
-    <h3 id="flagUserModal-label" class="reveal__title"><%= t("leave", scope: "decidim.guest_meeting_registration.join_meeting_button.cancel_guest_confirm")  %></h3>
+    <h3 id="flagUserModal-label" class="reveal__title"><%= t("leave_title", scope: "decidim.guest_meeting_registration.join_meeting_button.cancel_guest_confirm")  %></h3>
     <button class="close-button" data-close aria-label="<%= t("cancel", scope: "decidim.guest_meeting_registration.join_meeting_button") %>" type="button">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -8,12 +8,8 @@
   <div class="columns row">
     <p><%= t("leave_confirmation", scope: "decidim.guest_meeting_registration.join_meeting_button.cancel_guest_confirm") %></p>
 
-    <div class="columns medium-5">
-      <button class="button expanded button--sc" data-close><%= t("close", scope: "decidim.shared.flag_modal") %></button>
-    </div>
-
-    <div class="columns medium-7">
-      <%= link_to(t("leave", scope: "decidim.guest_meeting_registration.join_meeting_button.cancel_guest_confirm"), cancellation_url, class: button_classes ) %>
+    <div class="columns medium-7 float-left padding-left-0">
+      <%= link_to(t("leave_html", scope: "decidim.guest_meeting_registration.join_meeting_button.cancel_guest_confirm"), cancellation_url, class: button_classes.gsub(/expanded/, "") ) %>
     </div>
   </div>
 </div>
