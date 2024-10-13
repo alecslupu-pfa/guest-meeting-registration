@@ -5,8 +5,8 @@ en:
       meeting:
         disable_account_confirmation: Don't ask users to choose between logging in
           or proceeding as guests.
-        enable_cancellation: Allow users to cancel thei registation
-        enable_guest_registration: Allow guest users (no signed in) to regitster to
+        enable_cancellation: Allow users to cancel their registration
+        enable_guest_registration: Allow guest users (no signed in) to register to
           meetings
         enable_registration_confirmation: Ask users to confirm their registration
   decidim:

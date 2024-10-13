@@ -16,9 +16,9 @@ describe "Admin manages registration settings", type: :system do
   it "enables the registration settings" do
     visit registrations_edit_path
 
-    check "Enable guest registration"
-    check "Enable registration confirmation"
-    check "Enable cancellation"
+    check I18n.t("activemodel.attributes.meeting.enable_guest_registration")
+    check I18n.t("activemodel.attributes.meeting.enable_registration_confirmation")
+    check I18n.t("activemodel.attributes.meeting.enable_cancellation")
 
     expect(meeting).not_to be_enable_guest_registration
     expect(meeting).not_to be_enable_registration_confirmation
@@ -41,9 +41,9 @@ describe "Admin manages registration settings", type: :system do
 
     visit registrations_edit_path
 
-    uncheck "Enable guest registration"
-    uncheck "Enable registration confirmation"
-    uncheck "Enable cancellation"
+    uncheck I18n.t("activemodel.attributes.meeting.enable_guest_registration")
+    uncheck I18n.t("activemodel.attributes.meeting.enable_registration_confirmation")
+    uncheck I18n.t("activemodel.attributes.meeting.enable_cancellation")
 
     expect(meeting).to be_enable_guest_registration
     expect(meeting).to be_enable_registration_confirmation

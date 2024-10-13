@@ -116,7 +116,7 @@ describe "Show meeting", type: :system do
             click_button "Join the meeting"
           end
 
-          click_button "Join with account"
+          click_button I18n.t("decidim.guest_meeting_registration.join_meeting_button.i_have_account")
 
           expect(page).to have_css("#loginModal", visible: :visible)
         end
