@@ -1,5 +1,14 @@
 ---
 en:
+  activemodel:
+    attributes:
+      meeting:
+        disable_account_confirmation: Don't ask users to choose between logging in
+          or proceeding as guests.
+        enable_cancellation: Allow users to cancel their registration
+        enable_guest_registration: Allow guest users (no signed in) to register to
+          meetings
+        enable_registration_confirmation: Ask users to confirm their registration
   decidim:
     components:
       guest_meeting_registration:
@@ -7,12 +16,13 @@ en:
     guest_meeting_registration:
       admin:
         guest_meeting_session:
-          disable_account_confirmation_html: Disable pop-up asking people to choose
-            whether they have or not an account
+          disable_account_confirmation_html: Enabling this setting  will remove the
+            pop-up that prompts users to select whether they have an account or want
+            to proceed as a guest.
           enable_cancellation_help_html: Allow users to cancel their registration
-          enable_guest_registration_help_html: Allow guest users to register to meetings
-          enable_registration_confirmation_help_html: Force users to confirm their
-            meeting registration
+          enable_guest_registration_help_html: They will be asked for a name and email
+          enable_registration_confirmation_help_html: An email will be sent to them
+            asking to confirm the registration.
         guest_meeting_settings:
           edit:
             title: Meeting Guest Registration
@@ -38,12 +48,15 @@ en:
           leave: Cancel your registration
           leave_confirmation: Are you sure you want to cancel your registration for
             this meeting?
-        description_html: If you have an account, or you want to contribute further
-          to this Meeting, chose the <strong>%{i_have_account}</strong> option. Otherwise
-          you can choose <strong>%{login_as_guest}</strong>
-        i_have_account: Join with account
+          leave_html: Cancel registration
+          leave_title: Cancel your registration
+        description_html: If you have an account or want to fully participate in this
+          meeting choose "%{i_have_account}". Otherwise, you can select "%{login_as_guest}"
+        i_have_account: Register with account
+        i_have_account_html: Register with<br /> account
         join: Join the meeting
-        login_as_guest: Join as guest
-        title: Please choose a way of joining
+        login_as_guest: Register as guest
+        login_as_guest_html: Register as<br /> guest
+        title: Select your registration method
       menu:
         guest_meeting_registration_settings: Guest meeting settings

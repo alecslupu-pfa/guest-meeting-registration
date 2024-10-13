@@ -5,17 +5,16 @@ require "spec_helper"
 describe "Guest user is confirming the account", type: :system do
   include_context "with a component"
   let(:manifest_name) { "meetings" }
-  let!(:meeting) { create :meeting, :published, component: component }
-  let!(:guest_meeting_registration_settings) { create(:guest_meeting_registration_settings, enable_guest_registration: true, enable_cancellation: true, organization: organization) }
-  let!(:registration) { create(:guest_meeting_registration, organization: organization, meeting: meeting) }
-
-  before do
-    meeting.update!(
-      registrations_enabled: true,
-      registration_form_enabled: false,
-      available_slots: 20
-    )
+  let!(:meeting) do
+    create :meeting, :published,
+           component: component,
+           enable_guest_registration: true,
+           enable_cancellation: true,
+           registrations_enabled: true,
+           registration_form_enabled: false,
+           available_slots: 20
   end
+  let!(:registration) { create(:guest_meeting_registration, organization: organization, meeting: meeting) }
 
   def meeting_path
     resource_locator(meeting).path

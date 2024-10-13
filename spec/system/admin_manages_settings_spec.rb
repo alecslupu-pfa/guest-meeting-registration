@@ -3,53 +3,57 @@
 require "spec_helper"
 
 describe "Admin manages registration settings", type: :system do
-  let(:organization) { create(:organization) }
-  let(:user) { create(:user, :admin, :confirmed, organization: organization) }
+  let(:manifest_name) { "meetings" }
 
-  before do
-    switch_to_host(organization.host)
-    login_as user, scope: :user
+  let!(:questionnaire) { create(:questionnaire) }
+  let!(:meeting) { create :meeting, scope: scope, component: current_component, questionnaire: questionnaire, registrations_enabled: true, registration_form_enabled: true }
+
+  include_context "when managing a component as an admin"
+  def registrations_edit_path
+    Decidim::EngineRouter.admin_proxy(component).edit_meeting_registrations_path(meeting_id: meeting.id)
   end
 
   it "enables the registration settings" do
-    expect(Decidim::GuestMeetingRegistration::Setting.last).to be_nil
+    visit registrations_edit_path
 
-    visit decidim_admin.edit_organization_path
-    click_on "Guest meeting settings"
+    check I18n.t("activemodel.attributes.meeting.enable_guest_registration")
+    check I18n.t("activemodel.attributes.meeting.enable_registration_confirmation")
+    check I18n.t("activemodel.attributes.meeting.enable_cancellation")
 
-    check "Enable guest registration"
-    check "Enable registration confirmation"
-    check "Enable cancellation"
+    expect(meeting).not_to be_enable_guest_registration
+    expect(meeting).not_to be_enable_registration_confirmation
+    expect(meeting).not_to be_enable_cancellation
 
-    expect(Decidim::GuestMeetingRegistration::Setting.last).not_to be_enable_guest_registration
-    expect(Decidim::GuestMeetingRegistration::Setting.last).not_to be_enable_registration_confirmation
-    expect(Decidim::GuestMeetingRegistration::Setting.last).not_to be_enable_cancellation
+    click_on "Save"
+    meeting.reload
 
-    click_on "Update"
-
-    expect(Decidim::GuestMeetingRegistration::Setting.last).to be_enable_guest_registration
-    expect(Decidim::GuestMeetingRegistration::Setting.last).to be_enable_registration_confirmation
-    expect(Decidim::GuestMeetingRegistration::Setting.last).to be_enable_cancellation
+    expect(meeting).to be_enable_guest_registration
+    expect(meeting).to be_enable_registration_confirmation
+    expect(meeting).to be_enable_cancellation
   end
 
   it "disables the registration settings" do
-    create(:guest_meeting_registration_settings, :enabled, :cancellable, :require_confirmation, organization: organization)
+    meeting.update!(
+      enable_guest_registration: true,
+      enable_cancellation: true,
+      enable_registration_confirmation: true
+    )
 
-    visit decidim_admin.edit_organization_path
-    click_on "Guest meeting settings"
+    visit registrations_edit_path
 
-    uncheck "Enable guest registration"
-    uncheck "Enable registration confirmation"
-    uncheck "Enable cancellation"
+    uncheck I18n.t("activemodel.attributes.meeting.enable_guest_registration")
+    uncheck I18n.t("activemodel.attributes.meeting.enable_registration_confirmation")
+    uncheck I18n.t("activemodel.attributes.meeting.enable_cancellation")
 
-    expect(Decidim::GuestMeetingRegistration::Setting.last).to be_enable_guest_registration
-    expect(Decidim::GuestMeetingRegistration::Setting.last).to be_enable_registration_confirmation
-    expect(Decidim::GuestMeetingRegistration::Setting.last).to be_enable_cancellation
+    expect(meeting).to be_enable_guest_registration
+    expect(meeting).to be_enable_registration_confirmation
+    expect(meeting).to be_enable_cancellation
 
-    click_on "Update"
+    click_on "Save"
+    meeting.reload
 
-    expect(Decidim::GuestMeetingRegistration::Setting.last).not_to be_enable_guest_registration
-    expect(Decidim::GuestMeetingRegistration::Setting.last).not_to be_enable_registration_confirmation
-    expect(Decidim::GuestMeetingRegistration::Setting.last).not_to be_enable_cancellation
+    expect(meeting).not_to be_enable_guest_registration
+    expect(meeting).not_to be_enable_registration_confirmation
+    expect(meeting).not_to be_enable_cancellation
   end
 end

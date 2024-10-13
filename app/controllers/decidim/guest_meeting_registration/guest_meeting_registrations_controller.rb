@@ -51,7 +51,7 @@ module Decidim
       end
 
       def allow_unregistered?
-        meeting_registration_settings.enable_guest_registration?
+        meeting.enable_guest_registration?
       end
 
       def allow_answers?
@@ -64,10 +64,6 @@ module Decidim
 
       def meeting
         @meeting ||= Decidim::Meetings::Meeting.where(component: current_component).find(params[:meeting_id])
-      end
-
-      def meeting_registration_settings
-        @meeting_registration_settings ||= Decidim::GuestMeetingRegistration::Setting.where(organization: current_organization).first_or_create
       end
     end
   end

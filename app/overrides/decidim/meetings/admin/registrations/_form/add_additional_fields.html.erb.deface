@@ -1,0 +1,48 @@
+<!-- insert_after 'div.row[3]' -->
+
+    <div class="guest-registration">
+        <div class="row column">
+          <%= form.check_box :enable_guest_registration, help_text: t("enable_guest_registration_help_html", scope:"decidim.guest_meeting_registration.admin.guest_meeting_session") %>
+        </div>
+
+        <div class="row column" style="padding-left: 2rem;" id="confirm_account_confirmation">
+          <%= form.check_box :disable_account_confirmation, help_text: t("disable_account_confirmation_html", scope:"decidim.guest_meeting_registration.admin.guest_meeting_session") %>
+        </div>
+    </div>
+
+    <div class="row column">
+      <%= form.check_box :enable_registration_confirmation, help_text: t("enable_registration_confirmation_help_html", scope:"decidim.guest_meeting_registration.admin.guest_meeting_session") %>
+    </div>
+
+    <div class="row column">
+      <%= form.check_box :enable_cancellation, help_text: t("enable_cancellation_help_html", scope:"decidim.guest_meeting_registration.admin.guest_meeting_session") %>
+    </div>
+
+    <div class="row column">&nbsp;</div>
+
+
+<script type="text/javascript">
+
+  document.addEventListener("DOMContentLoaded", function(event) {
+
+
+      const editMeetingRegistrationForm = $(".edit_meeting_registrations");
+
+      if (editMeetingRegistrationForm.length > 0) {
+          const enableGuestRegistration = editMeetingRegistrationForm.find("#meeting_enable_guest_registration");
+          const confirmAccount = editMeetingRegistrationForm.find("#confirm_account_confirmation");
+
+          const toggleConfirmationFields = function(){
+              const enabled = enableGuestRegistration.prop("checked");
+              confirmAccount.hide();
+
+              if ( enabled) {
+                  confirmAccount.show();
+              }
+          }
+          enableGuestRegistration.on("change", toggleConfirmationFields);
+          toggleConfirmationFields();
+      }
+  })
+
+</script>

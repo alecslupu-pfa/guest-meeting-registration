@@ -7,11 +7,10 @@ describe "Show meeting", type: :system do
   let(:manifest_name) { "meetings" }
   let!(:questionnaire) { create(:questionnaire) }
   let!(:question) { create(:questionnaire_question, questionnaire: questionnaire, position: 0) }
-  let!(:meeting) { create :meeting, :published, component: component, questionnaire: questionnaire }
+  let!(:meeting) { create :meeting, :published, component: component, questionnaire: questionnaire, enable_guest_registration: state }
   let!(:user) { create :user, :confirmed, organization: organization }
   let(:state) { true }
 
-  let!(:guest_meeting_registration_settings) { create(:guest_meeting_registration_settings, enable_guest_registration: state, organization: organization) }
   let(:registrations_enabled) { true }
   let(:registration_form_enabled) { false }
   let(:available_slots) { 20 }
@@ -117,7 +116,7 @@ describe "Show meeting", type: :system do
             click_button "Join the meeting"
           end
 
-          click_button "Join with account"
+          click_button I18n.t("decidim.guest_meeting_registration.join_meeting_button.i_have_account")
 
           expect(page).to have_css("#loginModal", visible: :visible)
         end

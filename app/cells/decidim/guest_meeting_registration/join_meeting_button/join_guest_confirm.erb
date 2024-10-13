@@ -16,7 +16,7 @@
     <div class="columns medium-5">
       <%= action_authorized_button_to(
             :join,
-            t("i_have_account", scope: "decidim.guest_meeting_registration.join_meeting_button"),
+            t("i_have_account_html", scope: "decidim.guest_meeting_registration.join_meeting_button"),
             "#",
             class: button_classes,
             disabled: !model.has_available_slots?,
@@ -24,12 +24,7 @@
           ) %>
     </div>
     <div class="columns medium-5">
-      <%= link_to(t("login_as_guest", scope: "decidim.guest_meeting_registration.join_meeting_button"), guest_registration_path, class: button_classes, disabled: !has_available_slots? ) %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="text-center">
-      <button class="link" data-close><%= t("cancel", scope: "decidim.guest_meeting_registration.join_meeting_button") %></button>
+      <%= link_to(t("login_as_guest_html", scope: "decidim.guest_meeting_registration.join_meeting_button"), guest_registration_path, class: button_classes, disabled: !has_available_slots? ) %>
     </div>
   </div>
 </div>
