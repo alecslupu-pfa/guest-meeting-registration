@@ -3,10 +3,10 @@ fr:
   activemodel:
     attributes:
       meeting:
-        disable_account_confirmation: Don't ask users to choose between logging in or proceeding as guests.
-        enable_cancellation: Allow users to cancel their registration
-        enable_guest_registration: Allow guest users (no signed in) to register to meetings
-        enable_registration_confirmation: Ask users to confirm their registration
+        disable_account_confirmation: Ne pas demander aux utilisateurs de choisir entre se connecter ou se continuer en tant qu'invités.
+        enable_cancellation: Permettre aux utilisateurs d'annuler leur inscription
+        enable_guest_registration: Permettre aux utilisateurs non-connectés de s'inscrire aux comptes
+        enable_registration_confirmation: Demander aux utilisateurs de confirmer leur inscription
   decidim:
     components:
       guest_meeting_registration:
@@ -15,7 +15,7 @@ fr:
       admin:
         guest_meeting_session:
           disable_account_confirmation_html: Désactiver la popup demandant aux gens de choisir s'ils ont ou non un compte
-          enable_cancellation_help_html: Allow users to cancel their registration
+          enable_cancellation_help_html: Permettre aux utilisateurs d'annuler leur inscription
           enable_guest_registration_help_html: Autoriser les utilisateurs non connectés à s'inscrire aux réunions
           enable_registration_confirmation_help_html: Rentre la confirmation de l'inscription à l'évènement obligatoire
         guest_meeting_settings:
@@ -41,14 +41,14 @@ fr:
         cancel_guest_confirm:
           leave: Annuler votre inscription
           leave_confirmation: Êtes-vous sûr de vouloir annuler votre inscription à cette rencontre ?
-          leave_html: Cancel registration
+          leave_html: Annuler l'inscription
           leave_title: Annuler votre inscription
         description_html: Si vous avez déjà un compte, choisissez l'option <strong>%{i_have_account}</strong> . Sinon, vous pouvez <strong>%{login_as_guest}</strong>
         i_have_account: S'inscrire avec un compte Decidim
-        i_have_account_html: Register with<br /> account
+        i_have_account_html: S'inscrire avec un compte
         join: S'inscrire à la rencontre
         login_as_guest: S'inscrire en tant qu'invité
-        login_as_guest_html: Register as<br /> guest
+        login_as_guest_html: S'inscrire sans compte
         title: Veuillez choisir un mode d'inscription
       menu:
         guest_meeting_registration_settings: Paramètres des inscriptions des invités
