@@ -52,3 +52,7 @@ ro:
         title: Vă rugăm să alegeți o modalitate de a participa
       menu:
         guest_meeting_registration_settings: Setările ședințelor anonime
+    meetings:
+      registrations:
+        create:
+          confirmation_required: Complete your registration - check your email to confirm your participation and reserve your seat
