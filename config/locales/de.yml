@@ -1,5 +1,5 @@
 ---
-de-AT:
+de:
   activemodel:
     attributes:
       meeting:
@@ -10,48 +10,48 @@ de-AT:
   decidim:
     components:
       guest_meeting_registration:
-        name: Gastanmeldungen bei Veranstaltungen
+        name: GuestMeetingRegistration
     guest_meeting_registration:
       admin:
         guest_meeting_session:
-          disable_account_confirmation_html: Pop-up deaktivieren, welches Teilnehmende fragt, ob sie sich mit oder ohne bestehendem Konto anmelden möchten
+          disable_account_confirmation_html: Enabling this setting  will remove the pop-up that prompts users to select whether they have an account or want to proceed as a guest.
           enable_cancellation_help_html: Allow users to cancel their registration
-          enable_guest_registration_help_html: Anmeldungen für Veranstaltungen ohne Plattformregistrierung erlauben
-          enable_registration_confirmation_help_html: Teilnehmende zwingen, Ihre Anmeldung an einer Veranstaltung zu bestätigen
+          enable_guest_registration_help_html: They will be asked for a name and email
+          enable_registration_confirmation_help_html: An email will be sent to them asking to confirm the registration.
         guest_meeting_settings:
           edit:
-            title: Gastanmeldungen für Veranstaltungen
-            update: Aktualisieren
+            title: Meeting Guest Registration
+            update: Update
       cancellation:
-        error: Bei der Abmeldung von der Veranstaltung ist ein Problem aufgetreten
-        success: Sie haben sich erfolgreich von der Veranstaltung abgemeldet
+        error: There was a problem canceling your meeting registration
+        success: You have successfully cancelled your meeting registration
       guest_meeting_registration_mailer:
         send_cancellation_request:
-          action: Abmelden
-          greeting: Willkommen %{recipient}!
-          instruction: 'Sie können die Teilnahme jederzeit absagen, indem Sie auf diesen Link klicken:'
-          subject: Abmeldungslink für %{meeting_title}
+          action: Cancel my registration
+          greeting: Welcome %{recipient}!
+          instruction: 'You can cancel meeting attendance at anytime accessing the link below:'
+          subject: Cancellation link for %{meeting_title}
         send_confirmation:
-          action: Anmeldung bestätigen
-          greeting: Willkommen %{recipient}!
-          instruction: 'Bitte bestätigen Sie Ihre E-Mail-Adresse über den folgenden Link:'
-          subject: Bestätigen Sie Ihre E-Mail für die Teilnahme an %{meeting_title}
+          action: Confirm my registration
+          greeting: Welcome %{recipient}!
+          instruction: 'You can confirm your email account through the link below:'
+          subject: Confirm your email to attend %{meeting_title}
       join_meeting_button:
-        cancel: Abbrechen
+        cancel: Cancel
         cancel_guest_confirm:
-          leave: Anmeldung stornieren
-          leave_confirmation: Sind Sie sicher dass Sie sich von dieser Veranstaltung abmelden möchten?
+          leave: Cancel your registration
+          leave_confirmation: Are you sure you want to cancel your registration for this meeting?
           leave_html: Cancel registration
-          leave_title: Anmeldung stornieren
-        description_html: Wenn Sie bereits ein Konto haben oder weiter zu dieser Veranstaltung beitragen möchten, wählen Sie die <strong>%{i_have_account}</strong> Option. Ansonsten können Sie <strong>%{login_as_guest}</strong>
-        i_have_account: Mit Konto anmelden
+          leave_title: Cancel your registration
+        description_html: If you have an account or want to fully participate in this meeting choose "%{i_have_account}". Otherwise, you can select "%{login_as_guest}"
+        i_have_account: Register with account
         i_have_account_html: Register with<br /> account
-        join: Zur Veranstaltung anmelden
-        login_as_guest: Als Gast anmelden
+        join: Join the meeting
+        login_as_guest: Register as guest
         login_as_guest_html: Register as<br /> guest
-        title: Wie möchten Sie sich anmelden?
+        title: Select your registration method
       menu:
-        guest_meeting_registration_settings: Gastanmeldungseinstellungen
+        guest_meeting_registration_settings: Guest meeting settings
     meetings:
       registrations:
         create:
